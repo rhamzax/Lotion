@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useParams, useOutletContext } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -6,17 +6,11 @@ import Title from '../components/Title';
 const Edit = () => {
   const [notes, handleNoteChange] = useOutletContext();
   const { id } = useParams(); 
-  const [note, setNote] = useState({});
-  console.log(note.html)
+  const [note, setNote] = useState(notes[id - 1] || {});
   //Get notes from local storage and use the the getParams hook to get the id of the note using useEffect
-  useEffect(() => {
-    if (notes !== null) {
-      setNote(notes[id - 1]);
-    }
-   }, [notes, id]);
+
 
   const handleContentChange = (htmlEdit) => {
-
     //get the quill text
     const text = quillRef.current.getEditor().getText();
     //update the note useState
@@ -28,13 +22,12 @@ const Edit = () => {
   }
  
   const handleTitleChange = (titleEdit) => {
-      
       setNote({
         ...note,
         title: titleEdit,
       });
   }
-  
+
   const handleTimeChange = (timeEdit) => {
     setNote({
       ...note,
@@ -44,7 +37,6 @@ const Edit = () => {
 
   const handleNoteSave = () => {
     let title = titleRef.current.getEditor().getText();
-    console.log(note)
     handleNoteChange(note.html, id, note.text, title, note.time);
   }
 
