@@ -8,6 +8,9 @@ const Header = () => {
         <h1 className="text-3xl font-bold text-center">Lotion</h1>
         <h2 className='text-xs text-gray-600 font-semibold'>Like Notion, but worse.</h2>
       </div>
+      <div>
+        <button onClick={() => localStorage.clear()}>Clear Local Storage</button>
+      </div>
     </header>
   )
 }
