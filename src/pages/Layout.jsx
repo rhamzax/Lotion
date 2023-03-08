@@ -7,6 +7,7 @@ const Layout = () => {
 
   // get notes from local storage
   const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || []);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   // update notes in local storage whenever the notes state changes
   useEffect(() => {
@@ -18,9 +19,8 @@ const Layout = () => {
   // add a new note to the notes state
   const handleAddNote = () => {
     const savedNotes = JSON.parse(localStorage.getItem('notes')) || [];
-    const newNote = { title: 'Untitled' + notes.length, text: '', html: ''};
+    const newNote = { title: 'Untitled', text: '', html: '', time: ''};
     const updatedNotes = [ newNote, ...savedNotes];
-    localStorage.setItem('notes', JSON.stringify(updatedNotes));
     setNotes(updatedNotes);
     navigate(`/notes/1`);
   }
@@ -42,17 +42,26 @@ const Layout = () => {
     setNotes(updatedNotes);
   }
   
-  
+  const handleToggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
 
   return (
-    <div className='flex flex-col h-screen'>
-      <Header />
-      <div className='flex-1 grid grid-cols-4'>
-        <Sidebar className='flex-grow' onAddNote={handleAddNote} notes={notes}/>
-        <div className='col-span-3'>
+    <div className="flex flex-col h-screen">
+      <Header onToggleSidebar={handleToggleSidebar} />
+      <div className="flex-1 grid grid-cols-4">
+        {sidebarOpen && (
+          <Sidebar className="flex-grow" onAddNote={handleAddNote} notes={notes} />
+        )}
+        {sidebarOpen ? 
+        <div className="col-span-3">
           <Outlet context={[notes, handleNoteChange]} />
-        </div>
+        </div>:
+        <div className="col-span-4">
+          <Outlet context={[notes, handleNoteChange]} />
+        </div>}
+        
       </div>
     </div>
   )

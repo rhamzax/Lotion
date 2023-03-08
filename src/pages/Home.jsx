@@ -28,7 +28,7 @@ const Home = () => {
       :
       <>
         <Title title={note.title || 'Untitled'} time={note.time || new Date().toLocaleString()} id={id}/>
-        <div dangerouslySetInnerHTML={{ __html: note.html}}></div>
+        <div dangerouslySetInnerHTML={{ __html: note.html}} className='px-3 py-2'></div>
       </>
       }
     </>

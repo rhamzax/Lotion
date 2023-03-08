@@ -7,18 +7,17 @@ const Edit = () => {
   const [notes, handleNoteChange] = useOutletContext();
   const { id } = useParams(); 
   const [note, setNote] = useState(notes[id - 1] || {});
-  //Get notes from local storage and use the the getParams hook to get the id of the note using useEffect
-
-
+  
   const handleContentChange = (htmlEdit) => {
     //get the quill text
-    const text = quillRef.current.getEditor().getText();
+    const text = quillRef.current.getEditor().getText() || '';
     //update the note useState
     setNote({
       ...note,
       text: text,
       html: htmlEdit
     });
+    console.log(note)
   }
  
   const handleTitleChange = (titleEdit) => {
@@ -49,7 +48,7 @@ const Edit = () => {
   return (
     <>
       <Title title={note.title} time={note.time} id={id} mode="edit" handleNoteSave={handleNoteSave} handleTitleChange={handleTitleChange} titleRef={titleRef} handleTimeChange={handleTimeChange}/>
-      <ReactQuill ref={quillRef} value={note.html} onChange={handleContentChange} />
+      <ReactQuill ref={quillRef} value={note.html} onChange={handleContentChange} className='textEdit'/>
     </>
   )
 }

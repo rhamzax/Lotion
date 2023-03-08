@@ -9,7 +9,7 @@ const Sidebar = ({ onAddNote, notes }) => {
     <div className='border-r-2 overflow-y-auto'>
       <div className='flex justify-between py-2 px-4 border-b-2'>
         <h1 className="text-2xl font-bold text-center">Notes</h1>
-        <button className='text-xl' onClick={onAddNote}>+</button>
+        <button className='text-xl hover:text-gray-600' onClick={onAddNote}>+</button>
       </div>
       <div>
         {notes.length > 0 ? notes.map((note, index) => {
