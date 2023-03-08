@@ -44,7 +44,7 @@ const Title = ({title, time, id, mode, handleNoteSave, handleTitleChange, titleR
           <h2 className='text-xs text-gray-500'>{formatDate(time)}</h2>
         </div>
         <div className='flex gap-8 '>
-          <Link to={`/notes/edit/${id}`}>
+          <Link to={`/notes/${id}/edit`}>
             <button className="hover:bg-gray-200 py-3 px-7 border-2 rounded-lg">Edit</button>
           </Link>
           <button onClick={handleDelete} className="hover:bg-gray-200 py-3 px-7 border-2 rounded-lg">Delete</button>

@@ -11,7 +11,7 @@ function App() {
           <Route path="/" element={<Navigate to ="/notes" />}></Route>
           <Route path="/notes" element={<Home />}></Route>
           <Route path="/notes/:id" element={<Home />}></Route>
-          <Route path="/notes/edit/:id" element={<Edit />}></Route>
+          <Route path="/notes/:id/edit" element={<Edit />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
